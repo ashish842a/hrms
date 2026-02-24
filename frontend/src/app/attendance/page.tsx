@@ -172,9 +172,9 @@ export default function AttendancePage() {
                 </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem', padding: '1.5rem', background: 'var(--panel-bg)', borderRadius: '12px', border: '1px solid var(--border-color)', alignItems: 'flex-end' }}>
+            <div className="flex-responsive" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1.5rem', padding: '1.5rem', background: 'var(--panel-bg)', borderRadius: '12px', border: '1px solid var(--border-color)', alignItems: 'flex-end' }}>
                 {user?.role === "admin" && (
-                    <div style={{ flex: '1 1 200px' }}>
+                    <div style={{ flex: '1 1 200px', width: '100%' }}>
                         <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Target Employee</label>
                         <select
                             value={employeeIdFilter}
@@ -189,7 +189,7 @@ export default function AttendancePage() {
                     </div>
                 )}
 
-                <div style={{ flex: '1 1 200px' }}>
+                <div style={{ flex: '1 1 200px', width: '100%' }}>
                     <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Filter by Month</label>
                     <input
                         type="month"
@@ -199,7 +199,7 @@ export default function AttendancePage() {
                     />
                 </div>
 
-                <div style={{ flex: '1 1 200px' }}>
+                <div style={{ flex: '1 1 200px', width: '100%' }}>
                     <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Filter by Day</label>
                     <input
                         type="date"
@@ -211,7 +211,7 @@ export default function AttendancePage() {
                 </div>
 
                 {(searchQuery || filterMonth || filterDay || employeeIdFilter) && (
-                    <button onClick={clearFilters} className="btn btn-outline" style={{ padding: '0.625rem 1rem' }}>
+                    <button onClick={clearFilters} className="btn btn-outline" style={{ padding: '0.625rem 1rem', width: '100%' }}>
                         Clear Filters
                     </button>
                 )}
@@ -329,7 +329,7 @@ export default function AttendancePage() {
                         </div>
                     )}
 
-                    <div style={{ display: "flex", gap: "1rem" }}>
+                    <div className="flex-responsive" style={{ display: "flex", gap: "1rem" }}>
                         <div className="form-group" style={{ flex: 1 }}>
                             <label>Attendance Date</label>
                             <input

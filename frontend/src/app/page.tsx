@@ -229,7 +229,7 @@ export default function EmployeesPage() {
             <input type="email" name="emailAddress" value={formData.emailAddress} onChange={handleInputChange} className="form-control" required placeholder="john@company.com" />
           </div>
 
-          <div style={{ display: "flex", gap: "1rem" }}>
+          <div className="flex-responsive" style={{ display: "flex", gap: "1rem" }}>
             <div className="form-group" style={{ flex: 1 }}>
               <label>Employee ID</label>
               <input name="employeeId" value={formData.employeeId} onChange={handleInputChange} className="form-control" required placeholder="e.g. EMP001" />
