@@ -23,11 +23,11 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/
 
 const getInitials = (name: string) => {
     if (!name) return "??";
-    const words = name.split(" ");
+    const words = name.trim().split(/\s+/);
     if (words.length > 1) {
         return (words[0][0] + words[words.length - 1][0]).toUpperCase();
     }
-    return name.slice(0, 2).toUpperCase();
+    return name.trim().slice(0, 2).toUpperCase();
 };
 
 export default function AttendancePage() {

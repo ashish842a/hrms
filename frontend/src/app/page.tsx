@@ -18,11 +18,12 @@ const API_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:500
 
 // Function to safely extract initials
 const getInitials = (name: string) => {
-  const words = name.split(" ");
+  if (!name) return "??";
+  const words = name.trim().split(/\s+/);
   if (words.length > 1) {
     return (words[0][0] + words[words.length - 1][0]).toUpperCase();
   }
-  return name.slice(0, 2).toUpperCase();
+  return name.trim().slice(0, 2).toUpperCase();
 };
 
 export default function EmployeesPage() {
