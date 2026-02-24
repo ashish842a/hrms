@@ -316,6 +316,7 @@ export default function AttendancePage() {
                                 value={formData.date}
                                 onChange={handleInputChange}
                                 className="form-control"
+                                min={new Date().toISOString().split("T")[0]}
                                 max={new Date().toISOString().split("T")[0]}
                                 required
                             />
