@@ -217,6 +217,28 @@ export default function AttendancePage() {
                 )}
             </div>
 
+            {/* Basic Dashboard Summary */}
+            {!loading && attendance.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+                    <div style={{ background: 'var(--panel-bg)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Total Tracked Days</span>
+                        <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-main)' }}>{attendance.length}</span>
+                    </div>
+                    <div style={{ background: 'var(--panel-bg)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', borderBottom: '4px solid var(--success)' }}>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Total Days Present</span>
+                        <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--success)' }}>
+                            {attendance.filter(r => r.status === 'Present').length}
+                        </span>
+                    </div>
+                    <div style={{ background: 'var(--panel-bg)', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', borderBottom: '4px solid var(--danger)' }}>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Total Days Absent</span>
+                        <span style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--danger)' }}>
+                            {attendance.filter(r => r.status === 'Absent').length}
+                        </span>
+                    </div>
+                </div>
+            )}
+
             <div className="glass-panel">
                 {loading ? (
                     <div className="loader-container"><div className="loader"></div></div>
