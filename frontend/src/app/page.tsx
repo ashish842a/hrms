@@ -14,7 +14,7 @@ interface Employee {
   department: string;
 }
 
-const API_URL = "http://localhost:5000/api/employees";
+const API_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/employees`;
 
 // Function to safely extract initials
 const getInitials = (name: string) => {
