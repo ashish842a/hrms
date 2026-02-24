@@ -9,49 +9,49 @@ const router = express.Router();
 
 // Get all employees (Admin Only)
 router.get("/", protect, adminOnly, async (req, res) => {
-    try {
-        const employees = await Employee.find({}).select("-password").sort({ createdAt: -1 });
-        res.json({ success: true, data: employees });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
+  try {
+    const employees = await Employee.find({}).select("-password").sort({ createdAt: -1 });
+    res.json({ success: true, data: employees });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
 
 // Add new employee (Admin Only)
 router.post("/", protect, adminOnly, async (req, res) => {
-    try {
-        const { employeeId, fullName, emailAddress, department } = req.body;
+  try {
+    const { employeeId, fullName, emailAddress, department } = req.body;
 
-        if (!employeeId || !fullName || !emailAddress || !department) {
-            return res.status(400).json({ success: false, message: "All fields are required" });
-        }
+    if (!employeeId || !fullName || !emailAddress || !department) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
 
-        const emailRegex = /.+\@.+\..+/;
-        if (!emailRegex.test(emailAddress)) {
-            return res.status(400).json({ success: false, message: "Invalid email format" });
-        }
+    const emailRegex = /.+\@.+\..+/;
+    if (!emailRegex.test(emailAddress)) {
+      return res.status(400).json({ success: false, message: "Invalid email format" });
+    }
 
-        const existingEmployee = await Employee.findOne({ employeeId });
-        if (existingEmployee) {
-            return res.status(400).json({ success: false, message: "Employee ID already exists" });
-        }
+    const existingEmployee = await Employee.findOne({ employeeId });
+    if (existingEmployee) {
+      return res.status(400).json({ success: false, message: "Employee ID already exists" });
+    }
 
-        // Generate random 8-character password
-        const plainPassword = Math.random().toString(36).slice(-8);
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(plainPassword, salt);
+    // Generate random 8-character password
+    const plainPassword = Math.random().toString(36).slice(-8);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(plainPassword, salt);
 
-        const employee = await Employee.create({
-            employeeId,
-            fullName,
-            emailAddress,
-            department,
-            password: hashedPassword,
-        });
+    const employee = await Employee.create({
+      employeeId,
+      fullName,
+      emailAddress,
+      department,
+      password: hashedPassword,
+    });
 
-        // Send confirmation email
-        // Send confirmation email
-        const emailHtml = `
+    // Send confirmation email
+    // Send confirmation email
+    const emailHtml = `
       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html dir="ltr" lang="en">
       <head>
@@ -159,52 +159,50 @@ router.post("/", protect, adminOnly, async (req, res) => {
       </html>
     `;
 
-        try {
-            await sendEmail({
-                email: emailAddress,
-                subject: "Welcome to the HRMS Lite Portal - Account Details",
-                html: emailHtml,
-            });
-        } catch (emailError) {
-            console.error("Error sending email:", emailError.message);
-            // We still return success but maybe log it
-        }
+    // Send email asynchronously in the background so it doesn't block the API response
+    sendEmail({
+      email: emailAddress,
+      subject: "Welcome to the HRMS Lite Portal - Account Details",
+      html: emailHtml,
+    }).catch((emailError) => {
+      console.error("Error sending email background task:", emailError.message);
+    });
 
-        res.status(201).json({
-            success: true,
-            data: {
-                _id: employee._id,
-                employeeId: employee.employeeId,
-                fullName: employee.fullName,
-                emailAddress: employee.emailAddress,
-                department: employee.department
-            }
-        });
+    res.status(201).json({
+      success: true,
+      data: {
+        _id: employee._id,
+        employeeId: employee.employeeId,
+        fullName: employee.fullName,
+        emailAddress: employee.emailAddress,
+        department: employee.department
+      }
+    });
 
-    } catch (error) {
-        if (error.code === 11000) {
-            return res.status(400).json({ success: false, message: "Employee ID or Email already exists" });
-        }
-        res.status(500).json({ success: false, message: error.message });
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({ success: false, message: "Employee ID or Email already exists" });
     }
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
 
 // Delete an employee (Admin Only)
 router.delete("/:id", protect, adminOnly, async (req, res) => {
-    try {
-        const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-        const employee = await Employee.findByIdAndDelete(id);
-        if (!employee) {
-            return res.status(404).json({ success: false, message: "Employee not found" });
-        }
-
-        await Attendance.deleteMany({ employeeId: id });
-
-        res.json({ success: true, data: {} });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    const employee = await Employee.findByIdAndDelete(id);
+    if (!employee) {
+      return res.status(404).json({ success: false, message: "Employee not found" });
     }
+
+    await Attendance.deleteMany({ employeeId: id });
+
+    res.json({ success: true, data: {} });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
 
 module.exports = router;
