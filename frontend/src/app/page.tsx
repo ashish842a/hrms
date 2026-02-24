@@ -263,7 +263,7 @@ export default function EmployeesPage() {
             </div>
             <div>
               <span style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "var(--text-muted)", marginBottom: "0.25rem" }}>Temporary Password</span>
-              <div style={{ display: "inline-block", background: "var(--bg-color)", color: "var(--text-main)", padding: "0.5rem 1rem", borderRadius: "6px", fontFamily: "monospace", fontSize: "1.1rem", fontWeight: 700, border: "1px solid var(--border-color)" }}>
+              <div style={{ display: "inline-block", background: "transparent", color: "var(--primary)", padding: "0.5rem 1rem", borderRadius: "6px", fontFamily: "monospace", fontSize: "1.2rem", fontWeight: 800, border: "2px dashed var(--primary)" }}>
                 {newEmployeeDetails?.plainPassword}
               </div>
             </div>

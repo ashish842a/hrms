@@ -90,7 +90,7 @@ router.post("/", protect, adminOnly, async (req, res) => {
                             <tr>
                               <td style="padding-bottom:12px;">
                                 <span style="display:inline-block;width:120px;color:#718096;font-size:14px;font-weight:500;">Login URL</span>
-                                <a href="http://localhost:3000/login" style="color:#4F46E5;font-size:15px;font-weight:600;text-decoration:none;">http://localhost:3000/login</a>
+                                <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/login" style="color:#4F46E5;font-size:15px;font-weight:600;text-decoration:none;">${process.env.FRONTEND_URL || 'http://localhost:3000'}/login</a>
                               </td>
                             </tr>
                             <tr>
@@ -128,7 +128,7 @@ router.post("/", protect, adminOnly, async (req, res) => {
                           <tbody>
                             <tr>
                               <td align="center">
-                                <a href="http://localhost:3000/login" style="background-color:#4F46E5;border-radius:8px;color:#ffffff;display:inline-block;font-size:16px;font-weight:600;line-height:50px;text-align:center;text-decoration:none;width:250px;">Access Employee Portal</a>
+                                <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/login" style="background-color:#4F46E5;border-radius:8px;color:#ffffff;display:inline-block;font-size:16px;font-weight:600;line-height:50px;text-align:center;text-decoration:none;width:250px;">Access Employee Portal</a>
                               </td>
                             </tr>
                           </tbody>

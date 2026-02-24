@@ -88,7 +88,7 @@ npm run seed
 \`\`\`bash
 npm run dev
 \`\`\`
-*(Server will start on http://localhost:5000)*
+*(Server will start on http://localhost:5000) (https://hrms-tbe0.onrender.com)*
 
 ### 4. Frontend Setup
 Open a secondary terminal process, navigate to the frontend directory, and begin the Next.js process.
@@ -98,13 +98,13 @@ cd frontend
 npm install
 npm run dev
 \`\`\`
-*(React Application will spin up on http://localhost:3000)*
+*(React Application will spin up on http://localhost:3000) (https://hrms-one-sigma.vercel.app/)*
 
 ---
 
 ## 💻 Usage
 
-Navigate to [http://localhost:3000](http://localhost:3000) inside your web browser. 
+Navigate to [http://localhost:3000](http://localhost:3000) or [https://hrms-one-sigma.vercel.app/](https://hrms-one-sigma.vercel.app/) inside your web browser. 
 
 1. Select the **Admin Access** tab.
 2. Log in using `admin@gmail.com` / `admin@123`.
