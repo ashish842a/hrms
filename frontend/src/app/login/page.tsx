@@ -61,15 +61,15 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', background: '#f1f5f9', padding: '0.25rem', borderRadius: '10px' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', background: 'var(--bg-color)', padding: '0.25rem', borderRadius: '10px', border: '1px solid var(--border-color)' }}>
                     <button
                         type="button"
                         onClick={() => { setActiveTab("admin"); setError(null); }}
                         style={{
                             flex: 1, padding: '0.6rem', border: 'none', borderRadius: '8px', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s',
-                            background: activeTab === "admin" ? 'white' : 'transparent',
-                            color: activeTab === "admin" ? 'var(--primary)' : '#64748b',
-                            boxShadow: activeTab === "admin" ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
+                            background: activeTab === "admin" ? 'var(--primary)' : 'transparent',
+                            color: activeTab === "admin" ? 'white' : 'var(--text-muted)',
+                            boxShadow: activeTab === "admin" ? '0 2px 4px rgba(0,0,0,0.1)' : 'none'
                         }}
                     >
                         Admin Access
@@ -79,9 +79,9 @@ export default function LoginPage() {
                         onClick={() => { setActiveTab("employee"); setError(null); }}
                         style={{
                             flex: 1, padding: '0.6rem', border: 'none', borderRadius: '8px', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s',
-                            background: activeTab === "employee" ? 'white' : 'transparent',
-                            color: activeTab === "employee" ? 'var(--primary)' : '#64748b',
-                            boxShadow: activeTab === "employee" ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
+                            background: activeTab === "employee" ? 'var(--primary)' : 'transparent',
+                            color: activeTab === "employee" ? 'white' : 'var(--text-muted)',
+                            boxShadow: activeTab === "employee" ? '0 2px 4px rgba(0,0,0,0.1)' : 'none'
                         }}
                     >
                         Employee Portal
