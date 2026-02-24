@@ -21,6 +21,14 @@ HRMS Lite is designed to simplify employee management and attendance tracking wi
 *   **Self-Service Check In:** Mark daily attendance easily ("Present" or "Absent").
 *   **Date Integrity:** Employees are dynamically blocked natively in both the UI Calendar and the Backend API from manipulating timestamps or backdating any attendance logs in the past. 
 
+### **🌟 Bonus Features Implemented**
+*   **Filter Attendance Records by Date:** A robust filter system added to strictly query specific months (`MM-YYYY`) and exact days via calendar UI.
+*   **Display Total Present Days Per Employee:** Contextual dashboard cards natively recalculate and inject the exact integer counts for specific dropdown-targeted employees.
+*   **Basic Dashboard Summary (Counts):** A beautifully styled quick-glance statistics row containing metrics for:
+    *   Total Tracked Days
+    *   Total Days Present 
+    *   Total Days Absent
+
 ### **Platform Security & UI**
 *   **Role-Based Access Control (RBAC):** Tight structural security preventing employees from invoking unauthorized REST queries.
 *   **JWT Authentication:** Localized session management.
