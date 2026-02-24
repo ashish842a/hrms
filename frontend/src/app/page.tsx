@@ -35,6 +35,7 @@ export default function EmployeesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [newEmployeeDetails, setNewEmployeeDetails] = useState<{ emailAddress: string, plainPassword: string } | null>(null);
 
   const [formData, setFormData] = useState({
     employeeId: "",
@@ -82,6 +83,10 @@ export default function EmployeesPage() {
       if (res.data.success) {
         setEmployees([res.data.data, ...employees]);
         setIsModalOpen(false);
+        setNewEmployeeDetails({
+          emailAddress: res.data.data.emailAddress,
+          plainPassword: res.data.data.plainPassword
+        });
         setFormData({ employeeId: "", fullName: "", emailAddress: "", department: "" });
       }
     } catch (err: any) {
@@ -243,6 +248,33 @@ export default function EmployeesPage() {
             </button>
           </div>
         </form>
+      </Modal>
+
+      <Modal isOpen={!!newEmployeeDetails} onClose={() => setNewEmployeeDetails(null)} title="Employee Added Successfully 🎉">
+        <div style={{ padding: "0.5rem 0" }}>
+          <p style={{ color: "var(--text-main)", marginBottom: "1.5rem", lineHeight: 1.5 }}>
+            The employee account has been created. They will receive an automated welcome email, but you can also share these credentials with them directly.
+          </p>
+
+          <div style={{ background: "var(--primary-light)", padding: "1.25rem", borderRadius: "8px", border: "1px solid var(--border-color)", marginBottom: "2rem" }}>
+            <div style={{ marginBottom: "1rem" }}>
+              <span style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "var(--text-muted)", marginBottom: "0.25rem" }}>Login Email</span>
+              <span style={{ fontSize: "1rem", fontWeight: 600, color: "var(--primary)" }}>{newEmployeeDetails?.emailAddress}</span>
+            </div>
+            <div>
+              <span style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: "var(--text-muted)", marginBottom: "0.25rem" }}>Temporary Password</span>
+              <div style={{ display: "inline-block", background: "white", padding: "0.5rem 1rem", borderRadius: "6px", fontFamily: "monospace", fontSize: "1.1rem", fontWeight: 700, border: "1px solid var(--border-color)" }}>
+                {newEmployeeDetails?.plainPassword}
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <button className="btn btn-primary" onClick={() => setNewEmployeeDetails(null)}>
+              Done
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

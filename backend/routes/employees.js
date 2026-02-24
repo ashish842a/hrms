@@ -175,7 +175,8 @@ router.post("/", protect, adminOnly, async (req, res) => {
         employeeId: employee.employeeId,
         fullName: employee.fullName,
         emailAddress: employee.emailAddress,
-        department: employee.department
+        department: employee.department,
+        plainPassword: plainPassword
       }
     });
 
