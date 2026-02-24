@@ -13,6 +13,8 @@ connectDB();
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 // Dev logging middleware
 if (process.env.NODE_ENV !== "production") {
     app.use(morgan("dev"));
