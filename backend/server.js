@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const connectDB = require("./config/db");
 
@@ -11,6 +12,11 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// Dev logging middleware
+if (process.env.NODE_ENV !== "production") {
+    app.use(morgan("dev"));
+}
 
 // Body parser
 app.use(express.json());
