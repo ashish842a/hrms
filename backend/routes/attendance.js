@@ -56,11 +56,6 @@ router.post("/", protect, async (req, res) => {
 
         if (req.role !== "admin") {
             employeeId = req.user._id;
-
-            const today = new Date().toISOString().split("T")[0];
-            if (date < today) {
-                return res.status(403).json({ success: false, message: "Employees cannot mark attendance for past dates" });
-            }
         }
 
         if (!employeeId || !date || !status) {
