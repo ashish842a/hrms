@@ -94,7 +94,7 @@ npm run seed
 
 **Start Node Server:**
 \`\`\`bash
-npm run dev
+node server.js
 \`\`\`
 *(Server will start on http://localhost:5000) (https://hrms-tbe0.onrender.com)*
 
