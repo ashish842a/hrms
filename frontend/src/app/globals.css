@@ -574,10 +574,6 @@ tbody tr:hover {
     border-bottom: 1px solid var(--border-color);
   }
 
-  .nav-links {
-    display: none !important;
-    /* Will be handled by a mobile menu if needed */
-  }
 
   .sidebar footer,
   .sidebar>div:last-child {
